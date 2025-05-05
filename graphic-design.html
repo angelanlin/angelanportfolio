@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.typekit.net/cts0lsx.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Graphic Design</title>
+    <style>
+        /* Gallery styles */
+        .navbar {
+            z-index: 999;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: fit-content;
+            width: 400px;
+            cursor: pointer;
+            overflow: hidden;
+            min-height: 400px; /* or match the height of your images */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
+            display: block;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(143,208,255,0.5);
+            object-fit: cover;
+            border-radius: 8px;
+            
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .overlay {
+            position: relative;
+        bottom: 0;
+        background: rgba(250, 117, 175, 1); /* Darker background for more contrast */
+        color: white;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        /* Modal styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(34, 87, 201, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0; /* Start with opacity 0 */
+    animation: fadeIn 0.5s forwards; /* Fade-in animation */
+        }
+        @keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+        #modalImage {
+            transition: transform 0.4s ease;
+}
+        .modal-content {
+            background: white;
+            display: flex;
+            max-width: 90%;
+            max-height: 90%;
+            width: 900px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            
+        }
+
+        body.modal-open, html.modal-open {
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .img-visible {
+            visibility: visible !important;
+            opacity: 1 !important;
+}
+        .carousel-section {
+            position: relative;
+            width: 60%;
+            background: #C7E6FF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* prevents image overflow */
+            contain: paint; /* Add this */
+            isolation: isolate; /* And this */
+        }
+
+        .carousel-section img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            margin: auto;
+            object-fit: contain;
+            position: relative; /* stays within container */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: none !important; /* Disable any transition effect */
+        }
+
+        
+
+        .description-section {
+            width: 40%;
+            padding: 20px;
+            background: #fff;
+            overflow-y: auto;
+            z-index: 2;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #FA75AF;
+            cursor: pointer;
+            z-index: 10; /* or higher than .modal-content */
+        }
+
+        .prev, .next {
+            background: rgba(34, 87, 201, 0.6);
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            padding: 5px;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 4 ;
+        }
+
+        .prev {
+            left: 10px;
+            border-radius: 100%;
+            height: 30px;
+            width: 30px;
+        }
+
+        .next {
+            right: 10px;
+            border-radius: 100%;
+            height: 30px;
+            width: 30px;
+        }
+
+        .prev:hover {
+            background: #FFB5D5 ;
+        }
+
+        .next:hover {
+            background: #FFB5D5 ;
+        }
+
+
+        @media (max-width: 768px) {
+    .modal-content {
+        flex-direction: column;
+        height: 95vh;
+    }
+
+    .carousel-section {
+        width: 100%;
+        height: 50vh;
+    }
+
+    .description-section {
+        width: 100%;
+        max-height: 45vh;
+        overflow-y: auto;
+    }
+
+    .prev, .next {
+        top: 45%;
+    }
+}
+
+        /* Slide-up animation styles */
+        .slide-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.6s ease-out;
+        }
+
+        .slide-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Optional: Add styles for your dots (if needed) */
+        .dot {
+        height: 10px;
+        width: 10px;
+        margin: 0 5px;
+        background-color: #2257C9;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+    }
+
+.dot.active {
+    background-color: #FFB5D5;
+}
+
+.dot:hover {
+    background-color: #FF9AC0;
+    cursor: pointer;
+}
+
+     #dotsContainer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+}
+@keyframes slideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-left,
+.slide-right {
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+}
+
+#spinner {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(250, 117, 175, 0.3); /* translucent pink */
+    border-top: 5px solid #2257C9; /* vibrant blue accent */
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+    z-index: 5;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="nav-left">
+      <!-- Work Dropdown -->
+      <div class="dropdown">
+        <button class="dropbtn">Work</button>
+        <div class="dropdown-content">
+          <a href="/graphic-design.html">Graphic Design</a>
+          <a href="/digital-illustrations.html">Illustrations</a>
+          <a href="/video-work.html">Video Work</a>
+        </div>
+      </div>
+  
+      <!-- Contact Me Link -->
+      <a href="/contactme.html" class="nav-btn">Contact Me</a>
+    </div>
+  
+    <!-- Right side -->
+    <div class="nav-right">
+      <!-- Make logo alone handle the click -->
+      <div class="namelogo-right" onclick="window.location.href='/Angelan-Portfolio.html'">
+        <img src="logo/name_logo.png" alt="Angelan logo">
+      </div>
+  
+      <!-- Hamburger menu toggle -->
+      <label for="menu-toggle" class="hamburger">&#9776;</label>
+    </div>
+  
+    <!-- Mobile Menu Toggle -->
+    <input type="checkbox" id="menu-toggle" />
+    <div class="mobile-menu">
+      <a href="/Angelan-Portfolio.html">Home</a>
+      <a href="/graphic-design.html">Graphic Design</a>
+      <a href="/digital-illustrations.html">Illustrations</a>
+      <a href="/video-work.html">Video Work</a>
+      <a href="/contactme.html">Contact Me</a>
+    </div>
+  </nav>
+
+    <header>
+        <h1>Graphic Design</h1>
+        <h3>As a Graphic Designer, I want to embrace the use of colors and human emotions in my designs. To find out more about my thoughts behind each project, feel free to click on each photo to reveal the insight behind each design decision.</h3>
+    </header>
+
+    <!-- Gallery -->
+    <div class="gallery">
+        <div class="gallery-item slide-up" data-gallery-index="0">
+            <img src="graphicdesign/chinese or american poster copy/are you chinese or american_ copy Large.png" alt="Image 1">
+            <div class="overlay"><span>Are you Chinese or American?</span></div>
+        </div>
+        <div class="gallery-item slide-up" data-gallery-index="1">
+            <img src="graphicdesign/type/mockups/backandfrontmockup copy.png" alt="Image 2">
+            <div class="overlay"><span>Dangolin Type Specimen Book</span></div>
+        </div>
+        <div class="gallery-item slide-up" data-gallery-index="2">
+            <img src="graphicdesign/foodads/kft_susuru_ad.png" alt="Image 3">
+            <div class="overlay"><span>Food Business Ads</span></div>
+        </div>
+        <div class="gallery-item slide-up" data-gallery-index="3">
+            <img src="graphicdesign/cerealbox/Cereal-Box-Mockup.jpeg" alt="Image 4">
+            <div class="overlay"><span>Krave Redesign</span></div>
+        </div>
+        <div class="gallery-item slide-up" data-gallery-index="4">
+            <img src="graphicdesign/499/calenderbgedited Large.png" alt="Image 5">
+            <div class="overlay"><span>Starry Calendars</span></div>
+        </div>
+        <div class="gallery-item slide-up" data-gallery-index="5">
+            <img src="graphicdesign/j6/foodzine.png" alt="Image 6">
+            <div class="overlay"><span>J6 Rebranding</span></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal()">&times;</button>
+            <div class="carousel-section">
+                <button class="prev" onclick="prevSlide()">❮</button>
+                <img id="modalImage" src="graphicdesign/type/mockups/wholetypemockup.png" alt="Expanded View">
+                <button class="next" onclick="nextSlide()">❯</button>
+                <div class="dots" id="dotsContainer"></div> 
+            </div>
+            <div class="description-section" id="modalDescription">
+                <h2>Project Title</h2>
+                <p>Project description here...</p>
+            </div>
+        </div>
+    </div>
+  <button id="backToTop" title="Go to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+    <script>
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modalImage');
+const modalDesc = document.getElementById('modalDescription');
+const galleryItems = document.querySelectorAll('.gallery-item');
+const dotsContainer = document.getElementById('dotsContainer');
+
+// Spinner
+const spinner = document.createElement('div');
+spinner.id = 'spinner';
+modal.querySelector('.carousel-section').appendChild(spinner);
+
+        const galleryData = [
+        {
+title: "Are you Chinese or American?",
+description: "To analyze the idea of intersectionality I used food as a connection between my identities. Featuring various East Asian dishes and a dialogue in Chinese and English, this piece encapsulates my pride and struggles of being Chinese American. This piece was featured at the Art Institute of Chicago for The Culture of Us exhibition from Feburary 2024 to April 2024.",
+images: ["graphicdesign/chinese or american poster copy/are you chinese or american_ copy Large.png", "graphicdesign/chinese or american poster copy/coa_gallery.png"]
+},
+{
+title: "Dangolin Typeface",
+description: "Dangolin is a typeface designed after a trip to Osaka in the Summer of 2024. The contrast of serifs and bubble letters are based on the variety of experiences had in Osaka. The pastel colors are based on the Japanese sweet, dango. Creating both a type specimen book and poster was able to fully display the details in the typeface.",
+images: ["graphicdesign/type/mockups/backandfrontmockup copy.png","graphicdesign/type/mockups/wholetypemockup.png", "graphicdesign/type/specimen book spreads/dangolin_1.png", "graphicdesign/type/specimen book spreads/dangolin_2.png","graphicdesign/type/specimen book spreads/dangolin_3.png","graphicdesign/type/dangolinpostermockup copy.png","graphicdesign/type/typeposter_1.png","graphicdesign/type/postersketch.png"]
+},
+{
+title: "Food Business Ads",
+description: "In the Champaign Urbana area, the food scene is bright and bustling. Kung Fu Tea, Susuru Ramen, and BBQ Chicken are well known chains for the community. Understanding the overarching language embedded in each resturant ensures that the design is cohesive with their brand image while enhancing their food quality.",
+images: ["graphicdesign/foodads/kft_susuru_ad.png", "graphicdesign/foodads/kung fu tea/kung fu tea.png","graphicdesign/foodads/bbq chicken/bbg chicken ad-01.png", "graphicdesign/foodads/susuru ramen/susuru_ad-01.png"]
+},
+{
+title: "Krave Redesign",
+description: "Chinese American Krave reimagines Krave cereal through different ingredients. By incoporating a capybara as the logo, the friendly nature of the animals can be carried through the cereal brand as well. The use of red and yellow alludes to the prosperity related to Chinese New Year.",
+images: ["graphicdesign/cerealbox/Cereal-Box-Mockup.jpeg","graphicdesign/cerealbox/cerealboxdieline copy Large.png","graphicdesign/cerealbox/cerealbox.png","graphicdesign/cerealbox/cerealbackcover.png", "graphicdesign/cerealbox/cerealboxsidecapy.png"]
+},
+{
+title: "Starry Series",
+description: "Inspired by celestial map facisimilies, the Starry calendar is similar to a postcard format with space on the back side to write monthly reflections. Additonally, a cabinet pull out box was designed to hold all the calendar cards along with stickers. Self portrait recreation and reinvention were created to further understand the detailed procedures behind each map.",
+images: ["graphicdesign/499/calenderbgedited.png","graphicdesign/499/wholecalendaredited Large.png","graphicdesign/499/starrystickersbgedited copy Large.png","graphicdesign/499/reinventionbgedited copy Large.png","graphicdesign/499/facismilie1bgedited copy Large.png", "graphicdesign/499/expand01.jpg"]
+}
+,
+{
+title: "J6 Rebranding",
+description: "J6 is a bunsik styled Korean resturant in the CU area. Rebranding J6 with an iconic and authentic logo and food magazine allows their customer base to better recognize their afforable favorite spot. Various stages of brainstorming was able to further the expectations of each step of the process.",
+images: ["graphicdesign/j6/foodzine.png","graphicdesign/j6/foodzine2.png","graphicdesign/j6/foodzine3.png","graphicdesign/j6/foodzine4.png", "graphicdesign/j6/foodzine5.png","graphicdesign/j6/foodzine6.png","graphicdesign/j6/j6finallogo.png","graphicdesign/j6/j6sketches.png","graphicdesign/j6/j6brainstorm.png","graphicdesign/j6/j6stylesheet.png"]
+}
+
+];
+let currentIndex = 0;
+let currentSlide = 0;
+let zoomed = false;
+
+galleryItems.forEach(item => {
+    item.addEventListener('click', () => {
+        currentIndex = parseInt(item.getAttribute('data-gallery-index'));
+        currentSlide = 0;
+        openModal(currentIndex);
+    });
+});
+// Store the scroll position before the modal opens
+let scrollPosition = 0;
+
+function openModal(index) {
+    // Store the current scroll position
+    scrollPosition = window.scrollY;
+
+    // Prevent page scrolling when the modal is open
+    document.body.style.overflow = 'hidden';
+
+    currentIndex = index;
+    currentSlide = 0;
+    updateModal(galleryData[currentIndex], currentSlide);
+    modal.style.display = 'block';
+}
+
+function closeModal() {
+    modal.style.display = 'none';
+    
+    // Restore the page scroll position
+    document.body.style.overflow = ''; // Reset overflow to allow scrolling
+    window.scrollTo(0, scrollPosition); // Restore the scroll position
+}
+function openModal(index) {
+    document.body.classList.add('modal-open');
+    document.documentElement.classList.add('modal-open');
+
+    // Apply fade-in animation to modal only
+    modal.classList.remove('fade-out'); // Remove fade-out class if present
+    modal.style.display = 'flex'; // Make sure modal is visible before animation
+
+    // Force a reflow to restart animation (by briefly removing and adding the class)
+    void modal.offsetWidth; // This forces a reflow
+    modal.classList.add('fade-in'); // Start fade-in animation
+
+    updateModal(galleryData[index], currentSlide);
+}
+
+function closeModal() {
+    modal.classList.remove('fade-in'); // Remove fade-in class
+    modal.classList.add('fade-out'); // Apply fade-out class to trigger fade-out effect
+
+    // Delay closing the modal to allow fade-out animation to complete
+    setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+        document.documentElement.classList.remove('modal-open');
+    }, 300); // Match CSS animation duration for fade-out
+}
+
+
+function updateModal(data, slideIndex, direction = null) {
+    zoomed = false;
+    modalImg.classList.remove('slide-left', 'slide-right', 'img-visible');
+    void modalImg.offsetWidth; // Reflow
+
+    modalImg.style.transform = 'scale(1)';
+    modalImg.style.cursor = 'zoom-in';
+    modalImg.src = '';
+    spinner.style.display = 'block';
+
+    const newImg = new Image();
+    newImg.src = data.images[slideIndex];
+
+    newImg.onload = () => {
+        modalImg.src = newImg.src;
+        modalImg.alt = `${data.title} - Image ${slideIndex + 1}`;
+
+        // Trigger animation direction
+        if (direction === 'left') {
+            modalImg.classList.add('slide-left');
+        } else if (direction === 'right') {
+            modalImg.classList.add('slide-right');
+        }
+
+        modalImg.src = newImg.src;
+            modalImg.alt = `${data.title} - Image ${slideIndex + 1}`;
+
+            if (direction === 'left') {
+                modalImg.classList.add('slide-left');
+            } else if (direction === 'right') {
+                modalImg.classList.add('slide-right');
+            }
+            spinner.style.display = 'none';
+    };
+
+    newImg.onerror = () => {
+        spinner.style.display = 'none';
+        modalImg.alt = "Image failed to load.";
+    };
+
+    modalDesc.innerHTML = `<h2>${data.title}</h2><p>${data.description}</p>`;
+    updateDots(slideIndex, data.images.length);
+}
+
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + galleryData[currentIndex].images.length) % galleryData[currentIndex].images.length;
+    updateModal(galleryData[currentIndex], currentSlide, 'right');
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % galleryData[currentIndex].images.length;
+    updateModal(galleryData[currentIndex], currentSlide, 'left');
+}
+
+function updateDots(activeIndex, total) {
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (i === activeIndex) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+            const direction = i > currentSlide ? 'left' : 'right';
+            currentSlide = i;
+            updateModal(galleryData[currentIndex], currentSlide, direction);
+        });
+        dotsContainer.appendChild(dot);
+    }
+}
+
+modalImg.addEventListener('click', () => {
+    zoomed = !zoomed;
+    modalImg.style.transform = zoomed ? 'scale(2)' : 'scale(1)';
+    modalImg.style.cursor = zoomed ? 'zoom-out' : 'zoom-in';
+});
+
+modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        closeModal();
+    }
+});
+
+document.addEventListener('keydown', function(event) {
+    if (modal.style.display === 'flex') {
+        if (event.key === "Escape") closeModal();
+        else if (event.key === "ArrowLeft") prevSlide();
+        else if (event.key === "ArrowRight") nextSlide();
+    }
+});
+
+// Scroll animation
+const slideUpElements = document.querySelectorAll('.slide-up');
+const slideObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+slideUpElements.forEach(el => slideObserver.observe(el));
+
+// Back to top
+const backToTopButton = document.getElementById("backToTop");
+window.onscroll = function () {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopButton.classList.add("show");
+    } else {
+        backToTopButton.classList.remove("show");
+    }
+};
+backToTopButton.onclick = function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+function preloadImages() {
+    galleryData.forEach(item => {
+        item.images.forEach(src => {
+            const img = new Image();
+            img.src = src;
+            img.onload = function () {
+                // You can use this function to confirm that the image is loaded before showing it.
+            };
+        });
+    });
+}
+preloadImages();
+
+const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+  const menuToggle = document.getElementById('menu-toggle');
+
+  mobileMenuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle.checked = false;
+    });
+  });
+</script>
+</body>
+</html>

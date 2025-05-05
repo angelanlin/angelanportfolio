@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Work</title>
+  <link rel="stylesheet" href="https://use.typekit.net/cts0lsx.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+
+    /* Main container for video + description */
+    .h2{
+    line-height: 80% ;
+    }
+
+    .main-content {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      max-width: 1200px;
+      margin: auto;
+      flex-wrap: wrap;
+    }
+
+    .video-section,
+    .description-section {
+      flex: 1 1 45%;
+      background-color: #fff;
+      
+  
+    }
+
+    video {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+    /* For devices with max width 1024px (tablets) */
+    @media (max-width: 1024px) {
+      .main-content {
+        flex-direction: column; /* Stack video and description vertically */
+        gap: 20px;
+      }
+
+      .video-section, .description-section {
+        flex: 1 1 100%; /* Make both sections take up full width */
+      }
+
+    }
+
+    /* For devices with max width 768px (small tablets and large phones) */
+    @media (max-width: 768px) {
+      .main-content {
+        flex-direction: column; /* Stack video and description vertically */
+        gap: 15px;
+      }
+
+      .video-section, .description-section {
+        flex: 1 1 100%;
+        padding: 10px ;
+      }
+
+
+      .description-section h2 {
+        font-size: 1.4rem;
+      }
+
+      .description-section p {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* For devices with max width 480px (phones) */
+    @media (max-width: 480px) {
+      .main-content {
+        gap: 10px; /* Reduce gap for phones */
+      }
+
+      video {
+        width: 100%;
+        padding: 5px ;
+      }
+    }
+  
+  </style>
+</head>
+
+<body>
+ <!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-left">
+    <!-- Work Dropdown -->
+    <div class="dropdown">
+      <button class="dropbtn">Work</button>
+      <div class="dropdown-content">
+        <a href="/graphic-design.html">Graphic Design</a>
+        <a href="/digital-illustrations.html">Illustrations</a>
+        <a href="/video-work.html">Video Work</a>
+      </div>
+    </div>
+
+    <!-- Contact Me Link -->
+    <a href="/contactme.html" class="nav-btn">Contact Me</a>
+  </div>
+
+  <!-- Right side -->
+  <div class="nav-right">
+    <!-- Make logo alone handle the click -->
+    <div class="namelogo-right" onclick="window.location.href='/Angelan-Portfolio.html'">
+      <img src="logo/name_logo.png" alt="Angelan logo">
+    </div>
+
+    <!-- Hamburger menu toggle -->
+    <label for="menu-toggle" class="hamburger">&#9776;</label>
+  </div>
+
+  <!-- Mobile Menu Toggle -->
+  <input type="checkbox" id="menu-toggle" />
+  <div class="mobile-menu">
+    <a href="/Angelan-Portfolio.html">Home</a>
+    <a href="/graphic-design.html">Graphic Design</a>
+    <a href="/digital-illustrations.html">Illustrations</a>
+    <a href="/video-work.html">Video Work</a>
+    <a href="/contactme.html">Contact Me</a>
+  </div>
+</nav>
+
+  <!-- Header -->
+  <header>
+    <h1>Video Work</h1>
+    <h3>With the use of various kinds of animation and videography, I want to capture mundane moments and empower the normal. Click below to watch my videos!</h3>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="video-section slide-up">
+          <video controls poster="video work/stopmotion_thumbnail.png">
+          <source src="video work/stopmotion.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="description-section slide-up">
+        <h2>Chicago</h2>
+        <p>
+          This film was made using stop motion and Adobe Premiere Pro. Capturing a weekend at home away from college during  freshman year, infused me with nostalgia for something well known amongst the changes I was experiencing. 
+        </p> 
+    </div>
+    <div class="video-section slide-up">
+      <video controls poster="video work/whattowear_thumbnail.png">
+          <source src="video work/what2wear.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="description-section slide-up">
+        <h2>What 2 Wear?</h2>
+        <p>
+          Fashion and self expression are linked to identity. The unlimited choices in the closet fulfill a sense of reassurance that art is both within me and depicted outside of me as well. The use of both illustration and video editing capture how multi-facted art is in life.
+        </p> 
+    </div>
+    <div class="video-section slide-up">
+      <video controls poster="video work/wheredidallthetimego_thumbnail.png">
+          <source src="video work/wheredidallthetimego.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="description-section slide-up">
+        <h2>Where did all the time go?</h2>
+        <p>
+        This video project is an accumlation of all the projects in freshmen year. Although the change was scary intially, over time, growth and self discovery were able to be captured through meaningful relationships and creative expression.
+        </p> 
+    </div> 
+    <div class="video-section slide-up">
+      <video controls poster="video work/jellyfishanimation_thumbnail.png">
+        <source src="video work/jellyfishtears.MP4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="description-section slide-up">
+      <h2>Jellyfish Tears</h2>
+      <p>
+      This video project is an accumlation of all the projects in freshmen year. Although the change was scary intially, over time, growth and self discovery were able to be captured through meaningful relationships and creative expression.
+      </p> 
+  </div> 
+</div>
+  <button id="backToTop" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  <script>
+    // Intersection Observer for Slide-up Animation
+const slideUpElements = document.querySelectorAll('.slide-up');
+
+const slideObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // Trigger only once
+        }
+    });
+}, {
+    threshold: 0.1  // This means 10% of the element should be visible to trigger the animation
+});
+
+// Start observing each element with class 'slide-up'
+slideUpElements.forEach(el => slideObserver.observe(el));
+
+// Back to Top Button functionality
+const backToTopButton = document.getElementById("backToTop");
+
+// Show the button when the user scrolls down 200px from the top
+window.onscroll = function() {
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    backToTopButton.classList.add("show");
+  } else {
+    backToTopButton.classList.remove("show");
+  }
+};
+
+// When the user clicks on the button, scroll to the top
+backToTopButton.onclick = function() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+};
+
+const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+  const menuToggle = document.getElementById('menu-toggle');
+
+  mobileMenuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle.checked = false;
+    });
+  });
+      </script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <title>Angelan's Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.typekit.net/cts0lsx.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ========== SLIDE-UP ANIMATION ========== */
+    body{
+      margin: 0px;
+    }
+    .slide-up {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+    }
+    .slide-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+
+    /* ========== IMAGE BUTTONS ========== */
+    .image-button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 40px;
+      background-color: #C7E6FF;
+      margin-top: 40px;
+    }
+
+    .image-button {
+      position: relative;
+      width: 350px;
+      height: 350px;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .image-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .image-button:hover img {
+      transform: scale(1.1);
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(250, 117, 175, 0.85);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      font-size: 40px;
+      transition: opacity 0.3s ease;
+    }
+
+    .image-button:hover .overlay {
+      opacity: 1;
+    }
+
+    .image-button .overlay {
+      pointer-events: none; /* Prevent accidental blocking of taps */
+    }
+
+    .overlay.active {
+      opacity: 1 !important;
+    }
+
+
+
+    /* ========== VIDEO SECTION ========== */
+    .inline-video-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding-top: 20px;
+      position: relative;
+    }
+
+    .inline-video-section video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* ========== LOGO SECTION ========== */
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 10px;
+      margin: 0;
+      position: relative;
+      margin-top: 20px;
+    }
+
+    .logo-container .logo {
+      width: 300px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* ========== STATIC SPEECH BUBBLE ========== */
+    .speech-bubble {
+      background-color: #FF77B2;
+      color: white;
+      padding: 15px;
+      border-radius: 15px;
+      font-size: 20px;
+      max-width: 250px;
+      text-align: center;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+
+    .show-speech-bubble {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .logo-container {
+        flex-direction: column;
+      }
+
+      .logo-container .logo {
+        width: 200px;
+      }
+
+      .speech-bubble {
+        margin-top: 10px;
+        position: static;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .image-button {
+        width: 200px;
+        height: 200px;
+      }
+      .image-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+      .overlay {
+        font-size: 18px;
+      }
+
+      .logo-container .logo {
+        width: 150px;
+      }
+
+      .inline-video-section video {
+        padding-top: 50px ;
+        height: auto;
+        object-position: top;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-left">
+    <!-- Work Dropdown -->
+    <div class="dropdown">
+      <button class="dropbtn">Work</button>
+      <div class="dropdown-content">
+        <a href="/graphic-design.html">Graphic Design</a>
+        <a href="/digital-illustrations.html">Illustrations</a>
+        <a href="/video-work.html">Video Work</a>
+      </div>
+    </div>
+
+    <!-- Contact Me Link -->
+    <a href="/contactme.html" class="nav-btn">Contact Me</a>
+  </div>
+
+  <!-- Right side -->
+  <div class="nav-right">
+    <!-- Make logo alone handle the click -->
+    <div class="namelogo-right" onclick="window.location.href='/Angelan-Portfolio.html'">
+      <img src="logo/name_logo.png" alt="Angelan logo">
+    </div>
+
+    <!-- Hamburger menu toggle -->
+    <label for="menu-toggle" class="hamburger">&#9776;</label>
+  </div>
+
+  <!-- Mobile Menu Toggle -->
+  <input type="checkbox" id="menu-toggle" />
+  <div class="mobile-menu">
+    <a href="/Angelan-Portfolio.html">Home</a>
+    <a href="/graphic-design.html">Graphic Design</a>
+    <a href="/digital-illustrations.html">Illustrations</a>
+    <a href="/video-work.html">Video Work</a>
+    <a href="/contactme.html">Contact Me</a>
+  </div>
+</nav>
+
+
+      
+<div class="inline-video-section slide-up delay-2">
+  <video id="myVideo" muted autoplay playsinline>
+    <!-- Default video source (for desktop) -->
+    <source id="videoSource" src="logo/H_homepage.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+
+  <!-- Logo and Speech Bubble -->
+  <div class="logo-container slide-up delay-3" id="logoSection">
+    <img src="large icons/aboutme_icon.png" alt="Angelan's Logo" class="logo">
+    <div class="speech-bubble" id="speechBubble">Welcome to my portfolio! I am happy you are here. Choose a sticker!</div>
+  </div>
+
+  <!-- Image Buttons -->
+  <div class="image-button-container slide-up delay-4">
+    <div class="image-button">
+      <a href="/graphic-design.html">
+        <img src="large icons/gd_icon.png" alt="Graphic Design">
+        <div class="overlay">Graphic Design</div>
+      </a>
+    </div>
+    <div class="image-button">
+      <a href="/digital-illustrations.html">
+        <img src="large icons/digiillus_icon.png" alt="Illustration">
+        <div class="overlay">Illustration</div>
+      </a>
+    </div>
+    <div class="image-button">
+      <a href="/video-work.html">
+        <img src="large icons/videowork_icon.png" alt="Video Work">
+        <div class="overlay">Video Work</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Slide-up animation
+    const animatedElements = document.querySelectorAll('.slide-up');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    animatedElements.forEach(el => observer.observe(el));
+
+    // Show speech bubble when logo is in view
+    const speechBubble = document.getElementById('speechBubble');
+    const logoSection = document.getElementById('logoSection');
+    const bubbleObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          speechBubble.classList.add('show-speech-bubble');
+        }
+      });
+    }, { threshold: 0.5 });
+    bubbleObserver.observe(logoSection);
+
+    // Video logic (no poster image now)
+    const video = document.getElementById('myVideo');
+    let hasPlayed = false;
+
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasPlayed) {
+          video.currentTime = 0; // Reset the video to the beginning
+          video.play(); // Start playing the video
+          hasPlayed = true; // Prevent replay until scrolled out and back in
+        } else if (!entry.isIntersecting) {
+          hasPlayed = false; // Reset the flag when it's out of view
+          video.pause(); // Pause the video when it's out of view
+        }
+      });
+    }, { threshold: 0.6 });
+     // Function to update the video source based on screen width
+     function updateVideoSource() {
+      const video = document.getElementById('myVideo');
+      const videoSource = document.getElementById('videoSource');
+      
+      // Check screen width and swap video source accordingly
+      if (window.innerWidth <= 480) {
+        videoSource.src = 'logo/L_homepage.mp4'; // Mobile-specific video
+      } else {
+        videoSource.src = 'logo/H_homepage.mp4'; // Desktop-specific video
+      }
+
+      // Reload the video with the new source
+      video.load();
+      video.play();
+    }
+
+    // Call the function initially to set the correct video source on page load
+    updateVideoSource();
+
+    // Add an event listener to update video source when window is resized
+    window.addEventListener('resize', updateVideoSource);
+
+    videoObserver.observe(video);
+
+    // Mobile touch overlay toggle
+document.querySelectorAll('.image-button').forEach(button => {
+  button.addEventListener('touchstart', (e) => {
+    // Prevent default tap behavior like double-tap zoom
+    e.preventDefault();
+
+    // Toggle the overlay
+    const overlay = button.querySelector('.overlay');
+
+    // Remove active overlays from other buttons
+    document.querySelectorAll('.image-button .overlay').forEach(o => {
+      if (o !== overlay) o.style.opacity = '0';
+    });
+
+    // Toggle current overlay
+    if (overlay.style.opacity === '1') {
+      overlay.style.opacity = '0';
+    } else {
+      overlay.style.opacity = '1';
+    }
+  });
+});
+const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+  const menuToggle = document.getElementById('menu-toggle');
+
+  mobileMenuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle.checked = false;
+    });
+  });
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.typekit.net/cts0lsx.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css"> <!-- Optional if you're using external styles -->
+    <title>Contact Me</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            padding: 20px;
+            align-items: stretch;
+        }
+
+        .about-text {   
+            width: 100%;
+            max-width: 50%;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .profile-image {
+            display: flex;
+            width: 100%;
+            max-width: 45%;
+            height: 620px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    
+
+        /* Social Icons */
+        .social-icons {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .social-icons a {
+            margin: 0 15px;
+            font-size: 3rem;
+            color: #2257C9;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: #FA75AF;
+            transform: scale(1.25);
+        }
+/* Resume Button Styling */
+.resume-button {
+    text-align: center;
+}
+
+.btn-resume {
+    background-color: #0073e6;  /* Blue background */
+    color: white;  /* White text */
+    padding: 10px 20px;  /* Padding around the text */
+    font-size: 1.2rem;  /* Font size for the button */
+    border-radius: 5px;  /* Rounded corners */
+    text-decoration: none;  /* Remove underline */
+    transition: background-color 0.3s ease;  /* Smooth transition on hover */
+}
+
+.btn-resume:hover {
+    background-color: #005bb5;  /* Darker blue when hovered */
+}
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .profile-image {
+                max-width: 80%;
+                margin-bottom: 20px;
+            }
+
+            .about-text {
+                width: 100%;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .profile-image {
+                max-width: 90%;
+                margin-bottom: 20px;
+            }
+
+            .about-text {
+                padding: 5px;
+                max-width: 100%;
+                font-size: 0.9rem;
+            }
+
+            .social-icons a {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+            }
+
+            .profile-image {
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .about-text {
+                max-width: 100%;
+                padding: 0px;
+                font-size: 0.8rem;
+                margin: 0;
+            }
+
+            .social-icons a {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="nav-left">
+      <!-- Work Dropdown -->
+      <div class="dropdown">
+        <button class="dropbtn">Work</button>
+        <div class="dropdown-content">
+          <a href="/graphic-design.html">Graphic Design</a>
+          <a href="/digital-illustrations.html">Illustrations</a>
+          <a href="/video-work.html">Video Work</a>
+        </div>
+      </div>
+  
+      <!-- Contact Me Link -->
+      <a href="/contactme.html" class="nav-btn">Contact Me</a>
+    </div>
+  
+    <!-- Right side -->
+    <div class="nav-right">
+      <!-- Make logo alone handle the click -->
+      <div class="namelogo-right" onclick="window.location.href='/Angelan-Portfolio.html'">
+        <img src="logo/name_logo.png" alt="Angelan logo">
+      </div>
+  
+      <!-- Hamburger menu toggle -->
+      <label for="menu-toggle" class="hamburger">&#9776;</label>
+    </div>
+  
+    <!-- Mobile Menu Toggle -->
+    <input type="checkbox" id="menu-toggle" />
+    <div class="mobile-menu">
+      <a href="/Angelan-Portfolio.html">Home</a>
+      <a href="/graphic-design.html">Graphic Design</a>
+      <a href="/digital-illustrations.html">Illustrations</a>
+      <a href="/video-work.html">Video Work</a>
+      <a href="/contactme.html">Contact Me</a>
+    </div>
+  </nav>
+  
+
+    <!-- Main Content -->
+    <h1>Hello, get to know me!</h1>
+    <h3>Thank you for taking the time to see my work!</h3>
+
+    <!-- Container with slide-up effect -->
+    <div class="container" id="contact">
+        <div class="profile-image slide-up">
+            <img src="20240527_170339_Original.JPG" alt="Angelan smiling, standing outdoors">
+        </div>
+        <div class="about-text slide-up">
+            <h2>About Me</h2>
+            <p>My name is Angelan or Angie, as my friends refer to me. I am an undergraduate student at the University of Illinois at Urbana-Champaign majoring in BFA Graphic Design. Creating art is a way to heal myself by exploring human stories and emotions told through different mediums. I am a designer with a multitude of passions in various mediums who seeks to create art that inspires others!</p>
+
+            <!-- Social Media Links -->
+            <div class="social-icons">
+                <a href="https://www.instagram.com/angelarts.img/" target="_blank" class="fab fa-instagram"></a>
+                <a href="https://www.linkedin.com/in/angelan-lin-409070231/" target="_blank" class="fab fa-linkedin"></a>
+                <a href= "mailto:angelanlin2005@gmail.com" class="fas fa-envelope"></a>
+                
+            </div>
+        </div>
+    </div>
+
+        <!-- Resume Button -->
+        
+   
+    
+  <!-- Back to Top Button -->
+
+   <button id="backToTop" title="Go to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+    <script>
+        // Intersection Observer for Slide-up effect
+        const slideUpElements = document.querySelectorAll('.slide-up');
+
+        const slideObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Trigger only once
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        slideUpElements.forEach(el => slideObserver.observe(el));
+           // Get the button
+    const backToTopButton = document.getElementById("backToTop");
+
+// Show the button when user scrolls down 200px from the top
+window.onscroll = function() {
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    backToTopButton.classList.add("show");
+  } else {
+    backToTopButton.classList.remove("show");
+  }
+};
+
+// When the user clicks on the button, scroll to the top
+backToTopButton.onclick = function() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+};
+
+const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+  const menuToggle = document.getElementById('menu-toggle');
+
+  mobileMenuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle.checked = false;
+    });
+  });
+    </script>
+
+</body>
+</html>
