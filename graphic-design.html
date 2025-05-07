@@ -120,6 +120,16 @@
             isolation: isolate; /* And this */
         }
 
+        .carousel-section iframe {
+            width: 1200px;
+            height: 900px;
+            max-width: 100%;
+            max-height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+
+
         .carousel-section img {
             width: auto;
             height: auto;
@@ -304,44 +314,44 @@
     </style>
 </head>
 <body>
+<!-- Navbar -->
 <nav class="navbar">
-  <div class="nav-left">
-    <!-- Work Dropdown -->
-    <div class="dropdown">
-      <button class="dropbtn">Work</button>
-      <div class="dropdown-content">
-        <a href="./graphic-design.html">Graphic Design</a>
-        <a href="./digital-illustrations.html">Illustrations</a>
-        <a href="./video-work.html">Video Work</a>
+    <div class="nav-left">
+      <!-- Work Dropdown -->
+      <div class="dropdown">
+        <button class="dropbtn">Work</button>
+        <div class="dropdown-content">
+          <a href="/graphic-design.html">Graphic Design</a>
+          <a href="/digital-illustrations.html">Illustrations</a>
+          <a href="/video-work.html">Video Work</a>
+        </div>
       </div>
+  
+      <!-- Contact Me Link -->
+      <a href="/contactme.html" class="nav-btn">Contact Me</a>
     </div>
-      
-    <!-- Contact Me Link -->
-    <a href="./contactme.html" class="nav-btn">Contact Me</a>
-  </div>
-
-  <!-- Right side -->
-  <div class="nav-right">
-    <!-- Make logo alone handle the click -->
-    <div class="namelogo-right" onclick="window.location.href='./index.html'">
-      <img src="logo/name_logo.png" alt="Angelan logo">
+  
+    <!-- Right side -->
+    <div class="nav-right">
+      <!-- Make logo alone handle the click -->
+      <div class="namelogo-right" onclick="window.location.href='/index.html'">
+        <img src="logo/name_logo.png" alt="Angelan logo">
+      </div>
+  
+      <!-- Hamburger menu toggle -->
+      <label for="menu-toggle" class="hamburger">&#9776;</label>
     </div>
-
-    <!-- Hamburger menu toggle -->
-    <label for="menu-toggle" class="hamburger">&#9776;</label>
-  </div>
-
-  <!-- Mobile Menu Toggle -->
-  <input type="checkbox" id="menu-toggle" />
-  <div class="mobile-menu">
-    <a href="./index.html">Home</a>
-    <a href="./graphic-design.html">Graphic Design</a>
-    <a href="./digital-illustrations.html">Illustrations</a>
-    <a href="./video-work.html">Video Work</a>
-    <a href="./contactme.html">Contact Me</a>
-  </div>
-</nav>
-
+  
+    <!-- Mobile Menu Toggle -->
+    <input type="checkbox" id="menu-toggle" />
+    <div class="mobile-menu">
+      <a href="/index.html">Home</a>
+      <a href="/graphic-design.html">Graphic Design</a>
+      <a href="/digital-illustrations.html">Illustrations</a>
+      <a href="/video-work.html">Video Work</a>
+      <a href="/contactme.html">Contact Me</a>
+    </div>
+  </nav>
 
     <header>
         <h1>Graphic Design</h1>
@@ -402,7 +412,6 @@ const modalDesc = document.getElementById('modalDescription');
 const galleryItems = document.querySelectorAll('.gallery-item');
 const dotsContainer = document.getElementById('dotsContainer');
 
-// Spinner
 const spinner = document.createElement('div');
 spinner.id = 'spinner';
 modal.querySelector('.carousel-section').appendChild(spinner);
@@ -437,10 +446,11 @@ images: ["graphicdesign/499/calenderbgedited.png","graphicdesign/499/wholecalend
 {
 title: "J6 Rebranding",
 description: "J6 is a bunsik styled Korean resturant in the CU area. Rebranding J6 with an iconic and authentic logo and food magazine allows their customer base to better recognize their afforable favorite spot. Various stages of brainstorming was able to further the expectations of each step of the process.",
-images: ["graphicdesign/j6/foodzine.png","graphicdesign/j6/foodzine2.png","graphicdesign/j6/foodzine3.png","graphicdesign/j6/foodzine4.png", "graphicdesign/j6/foodzine5.png","graphicdesign/j6/foodzine6.png","graphicdesign/j6/j6finallogo.png","graphicdesign/j6/j6sketches.png","graphicdesign/j6/j6brainstorm.png","graphicdesign/j6/j6stylesheet.png"]
+images: ["graphicdesign/j6/foodzine.png",{iframe:"https://publuu.com/flip-book/864425/1903508/page/1?embed"},"graphicdesign/j6/j6finallogo.png","graphicdesign/j6/j6sketches.png","graphicdesign/j6/j6brainstorm.png","graphicdesign/j6/j6stylesheet.png"]
 }
 
 ];
+
 let currentIndex = 0;
 let currentSlide = 0;
 let zoomed = false;
@@ -452,98 +462,80 @@ galleryItems.forEach(item => {
         openModal(currentIndex);
     });
 });
-// Store the scroll position before the modal opens
-let scrollPosition = 0;
 
-function openModal(index) {
-    // Store the current scroll position
-    scrollPosition = window.scrollY;
-
-    // Prevent page scrolling when the modal is open
-    document.body.style.overflow = 'hidden';
-
-    currentIndex = index;
-    currentSlide = 0;
-    updateModal(galleryData[currentIndex], currentSlide);
-    modal.style.display = 'block';
-}
-
-function closeModal() {
-    modal.style.display = 'none';
-    
-    // Restore the page scroll position
-    document.body.style.overflow = ''; // Reset overflow to allow scrolling
-    window.scrollTo(0, scrollPosition); // Restore the scroll position
-}
 function openModal(index) {
     document.body.classList.add('modal-open');
     document.documentElement.classList.add('modal-open');
-
-    // Apply fade-in animation to modal only
-    modal.classList.remove('fade-out'); // Remove fade-out class if present
-    modal.style.display = 'flex'; // Make sure modal is visible before animation
-
-    // Force a reflow to restart animation (by briefly removing and adding the class)
-    void modal.offsetWidth; // This forces a reflow
-    modal.classList.add('fade-in'); // Start fade-in animation
-
-    updateModal(galleryData[index], currentSlide);
+    modal.classList.remove('fade-out');
+    modal.style.display = 'flex';
+    void modal.offsetWidth;
+    modal.classList.add('fade-in');
+    updateModal(galleryData[index], 0);
 }
 
 function closeModal() {
-    modal.classList.remove('fade-in'); // Remove fade-in class
-    modal.classList.add('fade-out'); // Apply fade-out class to trigger fade-out effect
-
-    // Delay closing the modal to allow fade-out animation to complete
+    modal.classList.remove('fade-in');
+    modal.classList.add('fade-out');
     setTimeout(() => {
         modal.style.display = 'none';
         document.body.classList.remove('modal-open');
         document.documentElement.classList.remove('modal-open');
-    }, 300); // Match CSS animation duration for fade-out
+    }, 300);
 }
-
 
 function updateModal(data, slideIndex, direction = null) {
     zoomed = false;
     modalImg.classList.remove('slide-left', 'slide-right', 'img-visible');
-    void modalImg.offsetWidth; // Reflow
+    void modalImg.offsetWidth;
 
     modalImg.style.transform = 'scale(1)';
     modalImg.style.cursor = 'zoom-in';
     modalImg.src = '';
     spinner.style.display = 'block';
 
-    const newImg = new Image();
-    newImg.src = data.images[slideIndex];
+    const currentItem = data.images[slideIndex];
 
-    newImg.onload = () => {
-        modalImg.src = newImg.src;
-        modalImg.alt = `${data.title} - Image ${slideIndex + 1}`;
-
-        // Trigger animation direction
-        if (direction === 'left') {
-            modalImg.classList.add('slide-left');
-        } else if (direction === 'right') {
-            modalImg.classList.add('slide-right');
-        }
-
-        modalImg.src = newImg.src;
-            modalImg.alt = `${data.title} - Image ${slideIndex + 1}`;
-
-            if (direction === 'left') {
-                modalImg.classList.add('slide-left');
-            } else if (direction === 'right') {
-                modalImg.classList.add('slide-right');
-            }
-            spinner.style.display = 'none';
-    };
-
-    newImg.onerror = () => {
-        spinner.style.display = 'none';
-        modalImg.alt = "Image failed to load.";
-    };
-
+    // Always update title/description
     modalDesc.innerHTML = `<h2>${data.title}</h2><p>${data.description}</p>`;
+
+    // Handle iframe
+    if (typeof currentItem === 'object' && currentItem.iframe) {
+        modalImg.style.display = 'none';
+        const existingIframe = document.getElementById('modalIframe');
+        if (existingIframe) existingIframe.remove();
+
+        const iframe = document.createElement('iframe');
+        iframe.src = currentItem.iframe;
+        iframe.width = "100%";
+        iframe.height = "100%";
+        iframe.style.border = "none";
+        iframe.setAttribute("allow", "clipboard-write; autoplay; fullscreen");
+        iframe.id = "modalIframe";
+        iframe.style.borderRadius = "8px";
+        spinner.style.display = 'none';
+
+        modal.querySelector('.carousel-section').appendChild(iframe);
+    } else {
+        // Handle image
+        modalImg.style.display = 'block';
+        const existingIframe = document.getElementById('modalIframe');
+        if (existingIframe) existingIframe.remove();
+
+        const newImg = new Image();
+        newImg.src = currentItem;
+        newImg.onload = () => {
+            modalImg.src = newImg.src;
+            modalImg.alt = `${data.title} - Image ${slideIndex + 1}`;
+            if (direction === 'left') modalImg.classList.add('slide-left');
+            else if (direction === 'right') modalImg.classList.add('slide-right');
+            spinner.style.display = 'none';
+        };
+        newImg.onerror = () => {
+            spinner.style.display = 'none';
+            modalImg.alt = "Image failed to load.";
+        };
+    }
+
     updateDots(slideIndex, data.images.length);
 }
 
@@ -579,9 +571,7 @@ modalImg.addEventListener('click', () => {
 });
 
 modal.addEventListener('click', (event) => {
-    if (event.target === modal) {
-        closeModal();
-    }
+    if (event.target === modal) closeModal();
 });
 
 document.addEventListener('keydown', function(event) {
@@ -606,38 +596,12 @@ slideUpElements.forEach(el => slideObserver.observe(el));
 
 // Back to top
 const backToTopButton = document.getElementById("backToTop");
-window.onscroll = function () {
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        backToTopButton.classList.add("show");
-    } else {
-        backToTopButton.classList.remove("show");
-    }
+window.onscroll = function() {
+    backToTopButton.style.display = (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) ? "block" : "none";
 };
-backToTopButton.onclick = function () {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+backToTopButton.onclick = function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 };
-
-function preloadImages() {
-    galleryData.forEach(item => {
-        item.images.forEach(src => {
-            const img = new Image();
-            img.src = src;
-            img.onload = function () {
-                // You can use this function to confirm that the image is loaded before showing it.
-            };
-        });
-    });
-}
-preloadImages();
-
-const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
-  const menuToggle = document.getElementById('menu-toggle');
-
-  mobileMenuLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      menuToggle.checked = false;
-    });
-  });
 </script>
 </body>
 </html>
