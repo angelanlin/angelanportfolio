@@ -18,7 +18,7 @@ body {
 }
 
 /* ========== TYPOGRAPHY ========== */
-h1, h2, h3, p {
+h2, h3, p {
   line-height: 1.5; /* Set consistent line height for all text elements */
 }
 h1 {
