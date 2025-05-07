@@ -226,10 +226,6 @@
 <div class="inline-video-section slide-up delay-2">
   <img src="./logo/L_homepage.gif"/>
 </div>
-
-  <picture>
-  <!-- Mobile first: screens up to 480px -->
-  <source srcset="./logo/P_homepage.gif" media="(max-width: 480px)">
   
   <!-- Fallback/default for larger screens -->
   <img src="./logo/L_homepage.gif" alt="Homepage Animation">
@@ -313,9 +309,9 @@
       
       // Check screen width and swap video source accordingly
       if (window.innerWidth <= 480) {
-        videoSource.src = 'logo/P_homepage.gif'; // Mobile-specific video
+        videoSource.src = './logo/P_homepage.gif'; // Mobile-specific video
       } else {
-        videoSource.src = 'logo/H_homepage.gif'; // Desktop-specific video
+        videoSource.src = './logo/H_homepage.gif'; // Desktop-specific video
       }
 
       // Reload the video with the new source
