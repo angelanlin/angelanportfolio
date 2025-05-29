@@ -612,11 +612,6 @@ backToTopButton.onclick = function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-var iframe = document.querySelector('iframe');
-var requestFullscreen = iframe.requestFullscreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullscreen || iframe.msRequestFullscreen;
-if (requestFullscreen) {
-    requestFullscreen.call(iframe);
-}
 </script>
 </body>
 </html>
