@@ -200,6 +200,26 @@
         }
 
 
+        /* Make the iframe fill its container */
+    #flipbookIframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    
+      /* Optional: full-page style */
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    
+      /* Ensure it displays properly on top */
+      z-index: 9999;
+    
+      /* Add smooth scaling, optional */
+      transition: all 0.3s ease-in-out;
+    }
+
         @media (max-width: 768px) {
     .modal-content {
         flex-direction: column;
