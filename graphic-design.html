@@ -510,6 +510,9 @@ function updateModal(data, slideIndex, direction = null) {
         iframe.height = "100%";
         iframe.style.border = "none";
         iframe.setAttribute("allow", "clipboard-write; autoplay; fullscreen");
+        iframe.setAttribute("allowfullscreen", "");
+        iframe.setAttribute("allow", "clipboard-write; autoplay; fullscreen");
+
         iframe.id = "modalIframe";
         iframe.style.borderRadius = "8px";
         spinner.style.display = 'none';
