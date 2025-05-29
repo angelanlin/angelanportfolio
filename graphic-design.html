@@ -25,7 +25,8 @@
             height: fit-content;
             width: 400px;
             cursor: pointer;
-            overflow: hidden;
+            overflow: visible; /* ✅ allow iframe to break out into fullscreen */
+            contain: unset;     /* ✅ no containment restrictions */
             min-height: 400px; /* or match the height of your images */
         }
 
@@ -505,14 +506,17 @@ function updateModal(data, slideIndex, direction = null) {
         if (existingIframe) existingIframe.remove();
 
         const iframe = document.createElement('iframe');
-        iframe.src = currentItem.iframe;
-        iframe.width = "100%";
-        iframe.height = "100%";
-        iframe.style.border = "none";
-        iframe.setAttribute("allow", "clipboard-write; autoplay; fullscreen");
-        iframe.id = "modalIframe";
-        iframe.style.borderRadius = "8px";
-        spinner.style.display = 'none';
+iframe.src = currentItem.iframe;
+iframe.width = "100%";
+iframe.height = "100%";
+iframe.style.border = "none";
+iframe.setAttribute("allow", "clipboard-write; autoplay; fullscreen");
+iframe.setAttribute("allowfullscreen", ""); // ✅ this is crucial
+iframe.id = "modalIframe";
+iframe.style.borderRadius = "8px";
+spinner.style.display = 'none';
+modal.querySelector('.carousel-section').appendChild(iframe);
+
 
         modal.querySelector('.carousel-section').appendChild(iframe);
     } else {
