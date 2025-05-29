@@ -202,9 +202,10 @@
 
         /* Make the iframe fill its container */
     #flipbookIframe {
-      width: 100%;
+          width: 100%;
       height: 100%;
-      border: none;
+      display: block;
+    
     
       /* Optional: full-page style */
       position: absolute;
@@ -415,6 +416,10 @@
                 <img id="modalImage" src="graphicdesign/type/mockups/wholetypemockup.png" alt="Expanded View">
                 <button class="next" onclick="nextSlide()">❯</button>
                 <div class="dots" id="dotsContainer"></div> 
+                <button onclick="makeIframeFullscreen()" id="fullscreenBtn" title="Fullscreen"
+        style="position: absolute; top: 10px; left: 15px; background: #FA75AF; color: white; border: none; border-radius: 5px; padding: 6px 10px; cursor: pointer; z-index: 11;">
+    ⛶ Fullscreen
+</button>
             </div>
             <div class="description-section" id="modalDescription">
                 <h2>Project Title</h2>
@@ -524,15 +529,18 @@ function updateModal(data, slideIndex, direction = null) {
         const existingIframe = document.getElementById('modalIframe');
         if (existingIframe) existingIframe.remove();
 
-        const iframe = document.createElement('iframe');
-        iframe.src = currentItem.iframe;
-        iframe.width = "100%";
-        iframe.height = "100%";
-        iframe.style.border = "none";
-        iframe.setAttribute("allow", "clipboard-write; autoplay; fullscreen");
-        iframe.id = "modalIframe";
-        iframe.style.borderRadius = "8px";
-        spinner.style.display = 'none';
+     const iframe = document.createElement('iframe');
+iframe.src = currentItem.iframe;
+iframe.width = "100%";
+iframe.height = "100%";
+iframe.style.border = "none";
+iframe.setAttribute("allowfullscreen", "true");
+iframe.setAttribute("webkitallowfullscreen", "true");
+iframe.setAttribute("mozallowfullscreen", "true");
+iframe.setAttribute("allow", "clipboard-write; autoplay; fullscreen");
+iframe.id = "modalIframe";
+iframe.style.borderRadius = "8px";
+
 
         modal.querySelector('.carousel-section').appendChild(iframe);
     } else {
@@ -624,16 +632,18 @@ backToTopButton.onclick = function() {
 };
 
 function makeIframeFullscreen() {
-  const iframe = document.getElementById('flipbookIframe');
-  if (iframe.requestFullscreen) {
-    iframe.requestFullscreen();
-  } else if (iframe.webkitRequestFullscreen) {
-    iframe.webkitRequestFullscreen();
-  } else if (iframe.mozRequestFullScreen) {
-    iframe.mozRequestFullScreen();
-  } else if (iframe.msRequestFullscreen) {
-    iframe.msRequestFullscreen();
-  }
+    const iframe = document.getElementById('modalIframe');
+    if (iframe) {
+        if (iframe.requestFullscreen) {
+            iframe.requestFullscreen();
+        } else if (iframe.webkitRequestFullscreen) {
+            iframe.webkitRequestFullscreen();
+        } else if (iframe.mozRequestFullScreen) {
+            iframe.mozRequestFullScreen();
+        } else if (iframe.msRequestFullscreen) {
+            iframe.msRequestFullscreen();
+        }
+    }
 }
 
 </script>
